@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Linq;
-
+using Newtonsoft;
 using GradeBook.Enums;
 using System.Collections.Generic;
 using System.IO;
@@ -11,6 +11,8 @@ namespace GradeBook.GradeBooks
 {
     public class BaseGradeBook
     {
+        //public GradeBookType Type { get; set; }
+        //test do gita
         public string Name { get; set; }
         public List<Student> Students { get; set; }
 
