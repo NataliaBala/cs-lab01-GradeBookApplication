@@ -72,15 +72,6 @@ namespace GradeBook.GradeBooks
 
     public class BaseGradeBook
     {
-       
-        public enum GradeBookType
-        {
-            Standard,
-            Ranked,
-            ESNU,
-            OneToFour,
-            SixPoint
-        }
         
         public GradeBookType Type { get; set; }
         public string Name { get; set; }
