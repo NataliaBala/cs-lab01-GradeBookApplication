@@ -5,6 +5,16 @@ namespace GradeBook.UserInterfaces
 {
     public static class StartingUserInterface
     {
+        public static void CreateCommand(string[] args)
+        {
+            if (args.Length != 3)
+            {
+                Console.WriteLine("Command not valid, Create requires a name and type of gradebook.");
+                return;
+            }
+
+            
+        }
         public static bool Quit = false;
         public static void CommandLoop()
         {
