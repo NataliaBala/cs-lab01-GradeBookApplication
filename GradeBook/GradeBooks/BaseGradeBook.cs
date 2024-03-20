@@ -8,67 +8,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 namespace GradeBook.GradeBooks
-{ public class StandardGradeBook : BaseGradeBook
-    {
-        public class RankedGradeBook : BaseGradeBook
-        {
-            public RankedGradeBook(string name) : base(name)
-            {
-                Type = GradeBookType.Ranked;
-            }
-            public override void CalculateStatistics()
-            {
-                if (Students.Count < 5)
-                {
-                    Console.WriteLine("Ranked grading requires at least 5 students.");
-                    return;
-                }
-
-                base.CalculateStatistics();
-            }
-            public override char GetLetterGrade(double averageGrade)
-            {
-                if (Students.Count < 5)
-                {
-                    Console.WriteLine("Ranked grading requires at least 5 students.");
-                    throw new InvalidOperationException("Ranked grading requires at least 5 students.");
-                }
-
-                List<double> grades = Students.OrderByDescending(s => s.AverageGrade).Select(s => s.AverageGrade).ToList();
-                int top20Percent = (int)Math.Ceiling(Students.Count * 0.2);
-                int top40Percent = (int)Math.Ceiling(Students.Count * 0.4);
-                int top60Percent = (int)Math.Ceiling(Students.Count * 0.6);
-                int top80Percent = (int)Math.Ceiling(Students.Count * 0.8);
-
-                if (grades.IndexOf(averageGrade) < top20Percent)
-                {
-                    return 'A';
-                }
-                else if (grades.IndexOf(averageGrade) < top40Percent)
-                {
-                    return 'B';
-                }
-                else if (grades.IndexOf(averageGrade) < top60Percent)
-                {
-                    return 'C';
-                }
-                else if (grades.IndexOf(averageGrade) < top80Percent)
-                {
-                    return 'D';
-                }
-                else
-                {
-                    return 'F';
-                }
-            }
-        }
-
-
-        public StandardGradeBook(string name) : base(name)
-        {
-            Type = GradeBookType.Standard;
-        }
-    }
+{ 
 
     public class BaseGradeBook
     {
