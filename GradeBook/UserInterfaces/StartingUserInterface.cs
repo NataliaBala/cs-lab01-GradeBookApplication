@@ -4,17 +4,7 @@ using System;
 namespace GradeBook.UserInterfaces
 {
     public static class StartingUserInterface
-    {
-        public static void CreateCommand(string[] args)
-        {
-            if (args.Length != 3)
-            {
-                Console.WriteLine("Command not valid, Create requires a name and type of gradebook.");
-                return;
-            }
-
-            
-        }
+    {  
         public static bool Quit = false;
         public static void CommandLoop()
         {
@@ -47,6 +37,11 @@ namespace GradeBook.UserInterfaces
             if (parts.Length != 2)
             {
                 Console.WriteLine("Command not valid, Create requires a name.");
+                return;
+            }
+            if (parts.Length != 3)
+            {
+                Console.WriteLine("Command not valid, Create requires a name and type of gradebook.");
                 return;
             }
             var name = parts[1];
@@ -85,5 +80,6 @@ namespace GradeBook.UserInterfaces
             Console.WriteLine();
             Console.WriteLine("Quit - Exits the application");
         }
+
     }
 }
