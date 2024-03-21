@@ -1,13 +1,13 @@
 ﻿using GradeBook.Enums;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using System.Linq;
+
 
 namespace GradeBook.GradeBooks
 {
-    internal class RankedGradeBook: BaseGradeBook
+    public class RankedGradeBook : BaseGradeBook
     {
         public RankedGradeBook(string name, bool isWeighted) : base(name, isWeighted)
         {
@@ -26,16 +26,6 @@ namespace GradeBook.GradeBooks
         }
         public override void CalculateStudentStatistics(string name)
         {
-
-            if (Students.Count < 5)
-            {
-                Console.WriteLine("Ranked grading requires at least 5 students.");
-            }
-            else
-            {
-                base.CalculateStatistics();
-            }
-
             if (Students.Count < 5)
             {
                 Console.WriteLine("Ranked grading requires at least 5 students.");
@@ -46,33 +36,30 @@ namespace GradeBook.GradeBooks
 
         public override char GetLetterGrade(double averageGrade)
         {
+
             if (Students.Count < 5)
             {
-                throw new InvalidOperationException("Ranked grading requires at least 5 students.");
+                throw new InvalidOperationException();
             }
-
-            var threshold = (int)Math.Ceiling(Students.Count * 0.2);
-            var grades = Students.OrderByDescending(s => s.AverageGrade).Select(s => s.AverageGrade).ToList();
-
-            if (grades.IndexOf(averageGrade) < threshold)
+            int highAvStudents =
+                Students
+                .Select(a => a)
+                .Where(a => a.AverageGrade >= averageGrade)
+                .Count();
+            var highAvStudentsPercentage = Decimal.Divide(highAvStudents, Students.Count) * 100;
+            var percentToGrade = (100 - highAvStudentsPercentage);
+            switch (percentToGrade)
             {
-                return 'A';
-            }
-            else if (grades.IndexOf(averageGrade) < threshold * 2)
-            {
-                return 'B';
-            }
-            else if (grades.IndexOf(averageGrade) < threshold * 3)
-            {
-                return 'C';
-            }
-            else if (grades.IndexOf(averageGrade) < threshold * 4)
-            {
-                return 'D';
-            }
-            else
-            {
-                return 'F';
+                case decimal percentage when (percentToGrade >= 80):
+                    return 'A';
+                case decimal percentage when (percentToGrade < 80 && percentToGrade >= 60):
+                    return 'B';
+                case decimal percentage when (percentToGrade < 60 && percentToGrade >= 40):
+                    return 'C';
+                case decimal percentage when (percentToGrade < 40 && percentToGrade >= 20):
+                    return 'D';
+                default:
+                    return 'F';
             }
         }
     }
