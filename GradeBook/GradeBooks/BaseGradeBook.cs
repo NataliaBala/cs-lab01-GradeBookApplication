@@ -7,20 +7,24 @@ using System.IO;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace GradeBook.GradeBooks
-{ 
 
-    public class BaseGradeBook
+namespace GradeBook.GradeBooks
+{
+
+    public abstract class BaseGradeBook
     {
         
-        public abstract GradeBookType Type { get; set; }
-        public abstract  string Name { get; set; }
+        public  GradeBookType Type { get; set; }
+        public string Name { get; set; }
 
         public List<Student> Students { get; set; }
+
+        //public bool IsWeighted { get; set; }
 
         public BaseGradeBook(string name)
         {
             Name = name;
+            //IsWeighted = isWeighted;
             Students = new List<Student>();
         }
 
