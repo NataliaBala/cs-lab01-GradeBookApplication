@@ -13,8 +13,9 @@ namespace GradeBook.GradeBooks
     public class BaseGradeBook
     {
         
-        public GradeBookType Type { get; set; }
-        public string Name { get; set; }
+        public abstract GradeBookType Type { get; set; }
+        public abstract  string Name { get; set; }
+
         public List<Student> Students { get; set; }
 
         public BaseGradeBook(string name)
