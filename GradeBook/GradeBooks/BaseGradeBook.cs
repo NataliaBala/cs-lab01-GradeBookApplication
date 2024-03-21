@@ -19,7 +19,7 @@ namespace GradeBook.GradeBooks
 
         public List<Student> Students { get; set; }
 
-        //public bool IsWeighted { get; set; }
+        public bool IsWeighted { get; set; }
 
         public BaseGradeBook(string name)
         {
